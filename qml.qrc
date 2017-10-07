@@ -2,5 +2,9 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>pages/MainMenu.qml</file>
+        <file>Settings.qml</file>
+        <file>templates/RectLabel.qml</file>
+        <file>templates/Letter.qml</file>
     </qresource>
 </RCC>

@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/background.png</file>
+        <file>images/logo.png</file>
+        <file>images/en_alpha/a.png</file>
+        <file>images/en_alpha/b.png</file>
+        <file>images/en_alpha/c.png</file>
+        <file>images/en_alpha/d.png</file>
+        <file>images/en_alpha/e.png</file>
+        <file>images/en_alpha/f.png</file>
+        <file>images/en_alpha/g.png</file>
+        <file>images/en_alpha/h.png</file>
+        <file>images/en_alpha/I.png</file>
+        <file>images/en_alpha/j.png</file>
+        <file>images/en_alpha/k.png</file>
+        <file>images/en_alpha/l.png</file>
+        <file>images/en_alpha/m.png</file>
+        <file>images/en_alpha/n.png</file>
+        <file>images/en_alpha/o.png</file>
+        <file>images/en_alpha/p.png</file>
+        <file>images/en_alpha/q.png</file>
+        <file>images/en_alpha/r.png</file>
+        <file>images/en_alpha/s.png</file>
+        <file>images/en_alpha/t.png</file>
+        <file>images/en_alpha/u.png</file>
+        <file>images/en_alpha/v.png</file>
+        <file>images/en_alpha/w.png</file>
+        <file>images/en_alpha/x.png</file>
+        <file>images/en_alpha/y.png</file>
+        <file>images/en_alpha/z.png</file>
+    </qresource>
+</RCC>
