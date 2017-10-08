@@ -6,5 +6,10 @@
         <file>Settings.qml</file>
         <file>templates/RectLabel.qml</file>
         <file>templates/Letter.qml</file>
+        <file>js/workspace.js</file>
+        <file>Workspace.qml</file>
+        <file>pages/Scene.qml</file>
+        <file>templates/Conveyor.qml</file>
+        <file>templates/Block.qml</file>
     </qresource>
 </RCC>

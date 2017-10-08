@@ -10,7 +10,7 @@
         <file>images/en_alpha/f.png</file>
         <file>images/en_alpha/g.png</file>
         <file>images/en_alpha/h.png</file>
-        <file>images/en_alpha/I.png</file>
+        <file>images/en_alpha/i.png</file>
         <file>images/en_alpha/j.png</file>
         <file>images/en_alpha/k.png</file>
         <file>images/en_alpha/l.png</file>
@@ -28,5 +28,8 @@
         <file>images/en_alpha/x.png</file>
         <file>images/en_alpha/y.png</file>
         <file>images/en_alpha/z.png</file>
+        <file>images/mute.png</file>
+        <file>images/speaker.png</file>
+        <file>images/background2.jpg</file>
     </qresource>
 </RCC>

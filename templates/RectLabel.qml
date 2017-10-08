@@ -7,12 +7,10 @@ Rectangle {
 
     NumberAnimation on opacity {
         id: anim
-        to: 0.2
+        to: 0
         duration: 600
         running: false
     }
-
-
 
     Row {
         id: oner

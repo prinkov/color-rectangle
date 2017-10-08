@@ -5,28 +5,23 @@ Image {
     id: letter
     property string let: "c"
     property bool animation: false
+    property int boomSpeed: 400
 
     OpacityAnimator {
         id: optAnim
         target: letter;
         from: letter.opacity;
         to: 0;
-        duration: 800
+        duration: boomSpeed
         running: false
       }
 
     SequentialAnimation on width {
         id: moving
+        running: animation
         loops: Animation.Infinite
         NumberAnimation { from: width * 1; to: width * 1.1; duration: 800; easing.type: Easing.InOutQuad }
         NumberAnimation { from: width * 1.1; to: width * 1; duration: 1000; easing.type: Easing.InOutQuad }
-    }
-
-    NumberAnimation {
-        id: burst
-        target: letter
-        duration: 150;
-        easing.type: Easing.OutBack
     }
 
     ParticleSystem {
@@ -55,13 +50,10 @@ Image {
         anchors.fill: parent
         onClicked: {
             optAnim.start()
-            pulseEmitter.pulse(400)
+            pulseEmitter.pulse(boomSpeed)
 
         }
-
-
     }
-
 
     height: parent.height
     fillMode: Image.PreserveAspectFit
