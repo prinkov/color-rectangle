@@ -11,5 +11,6 @@
         <file>pages/Scene.qml</file>
         <file>templates/Conveyor.qml</file>
         <file>templates/Block.qml</file>
+        <file>templates/Animation.qml</file>
     </qresource>
 </RCC>

@@ -6,14 +6,16 @@ Rectangle {
 
     property var letters : ['p', 'i', 'd', 'o', 'r']
     property int iterate: 1
+    property int number
 
     color: "transparent"
 
     Letter {
-        let: {
+        let:  letters[number]
+            /*{
             var t = Math.ceil(Math.random()*letters.length-1)
             letters[t]
-        }
+        }*/
         animation: true
     }
 
@@ -27,31 +29,9 @@ Rectangle {
     property double durationPost: {
         Math.ceil(conveyor.height * 30)
     }
+    property var oneAnim: NumberAnimation {
 
-    NumberAnimation {
-        id: startAnim
-        target: one;
-        property: "y";
-        from: one.y;
-        to: 0;
-        duration: durationPre
-        running: true
-
-        onStopped: {
-            var component = Qt.createComponent("Block.qml");
-            var t = component.createObject(one.parent, {});
-            contAnimt.start()
-        }
     }
-    NumberAnimation {
-        id: contAnimt
-        target: one
-        property: "y";
-
-        to: conveyor.height;
-        duration: durationPost
-        onStopped: {
-
-        }
+    property var twoAnim: NumberAnimation {
     }
 }

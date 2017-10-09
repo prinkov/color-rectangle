@@ -42,13 +42,24 @@ Rectangle {
 //        }
 
     }
-
-    Conveyor {
+    Row {
         anchors.top: panel.top
         anchors.topMargin: 50
-        width: parent.width / 6
+        width: parent.width
         height: parent.height - 50
-        anchors.horizontalCenter: parent.horizontalCenter
+        Repeater {
+            model: 6
+            Conveyor {
+                id: yt
+                number: index
+    //            anchors.top: panel.top
+    //            anchors.topMargin: 50
+                width: parent.width / 6
+                height: parent.height
+    //            height: parent.height - 50
+        //        anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
     }
 
 }
