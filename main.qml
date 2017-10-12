@@ -9,6 +9,16 @@ ApplicationWindow {
     height: 480 //Settings.screenHeight
     title: "Color Pick"
 
+    FontLoader {
+        id: mainFont
+        source: "qrc:/fonts/ARCADECLASSIC.TTF"
+    }
+
+    FontLoader {
+        id: mainFontRus
+        source: "qrc:/fonts/ARCADERUS.ttf"
+    }
+
     StackView {
         id: rootWindowStack
         anchors.fill: parent
@@ -22,6 +32,7 @@ ApplicationWindow {
                 duration: 200
             }
         }
+
         pushExit: Transition {
             PropertyAnimation {
                 property: "opacity"
@@ -30,6 +41,7 @@ ApplicationWindow {
                 duration: 200
             }
         }
+
         popEnter: Transition {
             PropertyAnimation {
                 property: "opacity"

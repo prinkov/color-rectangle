@@ -11,10 +11,11 @@ Rectangle {
 
    function createBlock() {
        var component = Qt.createComponent("qrc:/templates/Block.qml");
-       var t = component.createObject(conveyor, {});
+       var t = component.createObject(conveyor, {"number": conveyor.number});
        t.oneAnim.target = t;
        t.oneAnim.property = "y";
        t.oneAnim.from = t.y;
+       t.conveyorHeight = conveyor.height
        t.oneAnim.to = 0;
        t.oneAnim.duration = t.durationPre;
 

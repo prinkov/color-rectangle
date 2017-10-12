@@ -1,10 +1,12 @@
 import QtQuick 2.7
+import QtQuick.Controls.Material 2.0
+
 import "../templates"
+
 Rectangle {
     id: scene
 
-    Component.onCompleted: {
-    }
+    property int countLines: 7
 
     Image {
         anchors.fill: parent
@@ -14,52 +16,113 @@ Rectangle {
     Rectangle {
         id: panel
         height: 50
+        width: parent.width
+        color: "transparent"
         z: 80
-        width: parent.width
-        color: "blue"
-        opacity: 0.3
+
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                scene.countLines++
+            }
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            color: Material.color(Material.BlueGrey)
+            opacity: 0.6
+        }
 
 
+        Image {
+            id: pauseIcon
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            height: parent.height - 10
+            anchors.verticalCenter: parent.verticalCenter
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/images/pause.png"
+            antialiasing: true
+        }
 
-//        Image {
-//            id: img
-//            width: parent.width / 3
-////            anchors.right: parent.right
-////            anchors.rightMargin: 0
-//            anchors.horizontalCenter: parent.horizontalCenter
-//            source: "qrc:/images/table.png"
-//            fillMode: Image.PreserveAspectFit
+        Text {
+            text: "3"
+            font.family: mainFont.name
+            anchors.right: multiplyTxt.left
+            anchors.leftMargin: 0
+            anchors.verticalCenter: parent.verticalCenter
+            height: heartIcon.height
+            color: "#94e7ef"
+            font.pixelSize: heartIcon.height
+        }
 
-//            PropertyAnimation {
-//                id: animation;
-//                target: img;
-//                property: "width";
-//                to: 30;
-//                duration: 500
-//                running: true
-//            }
+        Text {
+            text: "x"
+            id: multiplyTxt
+            font.family: mainFont.name
+            anchors.right: heartIcon.left
+            anchors.leftMargin: 5
+            anchors.verticalCenter: parent.verticalCenter
+            color: "#94e7ef"
+            font.pixelSize: heartIcon.height / 2
+        }
 
-//        }
+        Image {
+            id: heartIcon
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            height: parent.height - 10
+            anchors.verticalCenter: parent.verticalCenter
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/images/heart.png"
+            antialiasing: true
+        }
 
-    }
-    Row {
-        anchors.top: panel.top
-        anchors.topMargin: 50
-        width: parent.width
-        height: parent.height - 50
-        Repeater {
-            model: 6
-            Conveyor {
-                id: yt
-                number: index
-    //            anchors.top: panel.top
-    //            anchors.topMargin: 50
-                width: parent.width / 6
-                height: parent.height
-    //            height: parent.height - 50
-        //        anchors.horizontalCenter: parent.horizontalCenter
+        Rectangle {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            height: parent.height - 10
+            width: 100
+            color: "transparent"
+            Block {
+                id: blockIcon
+                animation: true
+                height: parent.height/2
+                width: parent.height/2
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Text {
+                text: "1400"
+                color: blockIcon.getColor()
+                font.family: mainFont.name
+                anchors.left: blockIcon.right
+                anchors.leftMargin: 5
+                anchors.verticalCenter: parent.verticalCenter
+
+                font.pixelSize: heartIcon.height
             }
         }
     }
 
+    Row {
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: countLines * parent.width / 7
+        height: parent.height
+//        anchors.fill: parent
+        Repeater {
+            model: countLines
+            Conveyor {
+                id: yt
+                number: index
+                width: parent.width / countLines
+                height: parent.height
+            }
+        }
+    }
 }

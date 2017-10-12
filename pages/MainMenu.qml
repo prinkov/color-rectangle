@@ -46,9 +46,11 @@ Rectangle {
 
     Button {
         id: cntBtn
-        width: startBtn.width
         enabled: false
         text: "Continue"
+        font.pixelSize: 18
+        width: startBtn.width
+
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: colorLbl2.bottom
         anchors.topMargin: 50
@@ -60,11 +62,15 @@ Rectangle {
     Button {
         id: startBtn
         text: "new game"
+
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: cntBtn.bottom
         anchors.topMargin: 10
+        font.pixelSize: 18
+
         Material.background: Material.Green
         highlighted: true
+
         onClicked: {
             rootWindowStack.push(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
         }
@@ -73,10 +79,13 @@ Rectangle {
     Button {
         id: result
         width: startBtn.width
-        text: "Raiting"
+
+        text: "raiting"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: startBtn.bottom
         anchors.topMargin: 10
+        font.pixelSize: 18
+
         Material.background: Material.Blue
         highlighted: true
 
@@ -85,6 +94,7 @@ Rectangle {
     Button {
         id: exit
         width: startBtn.width
+        font.pixelSize: 18
 
         text: "Exit"
         anchors.horizontalCenter: parent.horizontalCenter
@@ -92,6 +102,7 @@ Rectangle {
         anchors.topMargin: 10
         Material.background: Material.Red
         highlighted: true
+
         onClicked: {
             Qt.quit()
         }
@@ -106,7 +117,7 @@ Rectangle {
 
 
         Image {
-            source: Workspace.mute ?  "qrc:/images/mute.png" : "qrc:/images/speaker.png"
+            source: Settings.mute ?  "qrc:/images/mute.png" : "qrc:/images/speaker.png"
             antialiasing: true
             fillMode: Image.PreserveAspectFit
             height: parent.height - 10
@@ -115,11 +126,11 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    if(!Workspace.mute)
+                    if(!Settings.mute)
                         parent.source = "qrc:/images/mute.png"
                     else
                         parent.source = "qrc:/images/speaker.png"
-                    Workspace.switchMute()
+                    Settings.switchMute()
                 }
             }
         }
