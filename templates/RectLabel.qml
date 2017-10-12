@@ -4,7 +4,12 @@ Rectangle {
     id: rectLabel
     property string text: ""
     property bool animation: false
+    property int spacing: 10
+    property variant letters:[]
 
+    signal destroyStopped
+
+    color: "transparent"
     NumberAnimation on opacity {
         id: anim
         to: 0
@@ -16,18 +21,14 @@ Rectangle {
         id: oner
         anchors.top: parent.top
         anchors.topMargin: 0
-        width: parent.width
+        anchors.horizontalCenter: parent.horizontalCenter
         height: parent.height
-        spacing: 10
-
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-
+        spacing: rectLabel.spacing
         Component.onCompleted: function() {
             var component = Qt.createComponent("Letter.qml");
 
             for(var i = 0; i < text.length; i++)
-            component.createObject(oner, {"let": text.charAt(i), "animation": animation})
+                letters[i] = component.createObject(oner, {"let": text.charAt(i), "animation": animation})
         }
 
     }
@@ -38,7 +39,21 @@ Rectangle {
 
     function hide() {
         anim.start()
+    }
 
+
+    function destroyAll() {
+        var counter = 0;
+        for(var i = 0; i < letters.length; i++) {
+            letters[i].boomSpeed = letters[i].boomSpeed * Math.random() * 3;
+
+            letters[i].Component.destruction.connect(function() {
+                counter++;
+                if(counter == letters.length)
+                    destroyStopped()
+            })
+            letters[i].boomDestroy()
+        }
     }
 
 }

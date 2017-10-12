@@ -36,75 +36,102 @@ Rectangle {
         animation: true
         text: "pick"
         anchors.top: colorLbl.bottom
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.margins: 30
+        width: parent.width
+        anchors.topMargin: 30
         height: 40
         color: "transparent"
     }
 
-    Button {
-        id: cntBtn
-        enabled: false
-        text: "Continue"
-        font.pixelSize: 18
-        width: startBtn.width
-
-        anchors.horizontalCenter: parent.horizontalCenter
+    Column {
         anchors.top: colorLbl2.bottom
         anchors.topMargin: 50
-        Material.background: Material.Purple
-        highlighted: true
+        spacing:35
+        width:parent.width
 
-    }
+        RectLabel {
+            id: cntBtn
+            spacing: 1
+            height: 35
+            width: parent.width
+            text: "continue"
+            anchors.horizontalCenter: parent.horizontalCenter
 
-    Button {
-        id: startBtn
-        text: "new game"
+            onDestroyStopped: {
+            }
 
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: cntBtn.bottom
-        anchors.topMargin: 10
-        font.pixelSize: 18
-
-        Material.background: Material.Green
-        highlighted: true
-
-        onClicked: {
-            rootWindowStack.push(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    cntBtn.destroyAll()
+                }
+            }
         }
-    }
 
-    Button {
-        id: result
-        width: startBtn.width
+        RectLabel {
+            id: startBtn
+            spacing: 1
+            height: 35
+            width: parent.width
+            text: "new game"
 
-        text: "raiting"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: startBtn.bottom
-        anchors.topMargin: 10
-        font.pixelSize: 18
 
-        Material.background: Material.Blue
-        highlighted: true
+            anchors.horizontalCenter: parent.horizontalCenter
 
-    }
+            Material.background: Material.Green
 
-    Button {
-        id: exit
-        width: startBtn.width
-        font.pixelSize: 18
+            onDestroyStopped: {
+                rootWindowStack.push(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
+            }
 
-        text: "Exit"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: result.bottom
-        anchors.topMargin: 10
-        Material.background: Material.Red
-        highlighted: true
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    startBtn.destroyAll()
+                }
+            }
+        }
 
-        onClicked: {
-            Qt.quit()
+        RectLabel {
+            id: result
+            spacing: 1
+            height: 35
+            width: parent.width
+            text: "raiting"
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            onDestroyStopped: {
+
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    result.destroyAll()
+                }
+            }
+            Material.background: Material.Blue
+        }
+
+        RectLabel {
+            id: exit
+            spacing: 1
+            height: 35
+            width: parent.width
+            text: "exit"
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Material.background: Material.Red
+
+            onDestroyStopped: {
+                Qt.quit()
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    exit.destroyAll()
+                }
+            }
         }
     }
 

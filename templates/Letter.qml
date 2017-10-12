@@ -49,8 +49,7 @@ Image {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            optAnim.start()
-            pulseEmitter.pulse(boomSpeed)
+            boomDestroy()
 
         }
     }
@@ -59,6 +58,9 @@ Image {
     fillMode: Image.PreserveAspectFit
     antialiasing: true
     source: "qrc:/images/en_alpha/"+let+".png"
+
+    opacity: !(let == " ") ? 1 : 0
+
     Component.onCompleted: {
         start.duration = getRnd(200) + 400
         stop.duration = start.duration
@@ -83,5 +85,11 @@ Image {
 
     function getRnd(n) {
         return Math.random() * n;
+    }
+
+    function boomDestroy() {
+        optAnim.start()
+        pulseEmitter.pulse(boomSpeed)
+        optAnim.stopped.connect(function(){destroy()})
     }
 }

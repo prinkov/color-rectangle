@@ -73,10 +73,10 @@
         <file>images/colors/red.png</file>
         <file>images/colors/white.png</file>
         <file>images/colors/yellow.png</file>
-        <file>images/basic-rainbow.png</file>
         <file>images/heart.png</file>
         <file>images/pause.png</file>
         <file>images/play-button.png</file>
         <file>images/stop.png</file>
+        <file>images/en_alpha/ .png</file>
     </qresource>
 </RCC>
