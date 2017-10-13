@@ -80,7 +80,7 @@ Rectangle {
             Material.background: Material.Green
 
             onDestroyStopped: {
-                rootWindowStack.push(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
+                rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
             }
 
             MouseArea {

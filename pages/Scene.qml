@@ -7,6 +7,10 @@ Rectangle {
     id: scene
 
     property int countLines: 7
+    property int scores: 0
+    property int life: 3
+    property var colors: ["black", "blue", "green", "orange", "pink", "purple", "red", "white", "yellow"]
+    property string color: colors[3]
 
     Image {
         anchors.fill: parent
@@ -22,10 +26,6 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
-
-            onClicked: {
-                scene.countLines++
-            }
         }
 
         Rectangle {
@@ -44,10 +44,17 @@ Rectangle {
             fillMode: Image.PreserveAspectFit
             source: "qrc:/images/pause.png"
             antialiasing: true
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
+                }
+            }
         }
 
         Text {
-            text: "3"
+            text: life
             font.family: mainFont.name
             anchors.right: multiplyTxt.left
             anchors.leftMargin: 0
@@ -90,13 +97,14 @@ Rectangle {
                 animation: true
                 height: parent.height/2
                 width: parent.height/2
+                col: scene.color
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 anchors.verticalCenter: parent.verticalCenter
             }
 
             Text {
-                text: "1400"
+                text: scores
                 color: blockIcon.getColor()
                 font.family: mainFont.name
                 anchors.left: blockIcon.right
@@ -125,4 +133,11 @@ Rectangle {
             }
         }
     }
+
+    function lifeIncrease() {
+        life--;
+        if(life == 0)
+            scene.destroy()
+    }
+
 }

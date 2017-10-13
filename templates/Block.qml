@@ -6,6 +6,9 @@ Rectangle {
     id: one
     property int number
     property bool animation: true
+
+    signal boomed
+
     property int conveyorHeight: 0
     property var colors: ["black", "blue", "green", "orange", "pink", "purple", "red", "white", "yellow"]
 
@@ -83,8 +86,17 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                console.log(scene.color + " " + col)
+                if(scene.color == col)
+                    scores++
+                else
+                    lifeIncrease()
                 optAnim.start()
                 pulseEmitter.pulse(cover.boomSpeed)
+                optAnim.onStopped.connect(
+                    function(){
+                        boomed()
+                    })
 
             }
         }
@@ -124,4 +136,9 @@ Rectangle {
     function getColor() {
        return colorCode[col]
     }
+
+    function getColors() {
+        return colors
+    }
+
 }

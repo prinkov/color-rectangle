@@ -29,8 +29,16 @@ Rectangle {
            t.twoAnim.start()
        })
        t.twoAnim.stopped.connect(function() {
+           if(t.col === scene.color) {
+               scene.lifeIncrease()
+           }
+           t.destroy()
+       })
+
+       t.onBoomed.connect(function() {
             t.destroy()
        })
+
    }
 
 }
