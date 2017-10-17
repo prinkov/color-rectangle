@@ -2,8 +2,9 @@ import QtQuick 2.7
 import QtQuick.Controls.Material 2.0
 import QtQuick.Particles 2.0
 
+import xyz.prinkov 1.0
+
 Rectangle {
-    id: one
     property int number
     property bool animation: true
 
@@ -26,10 +27,10 @@ Rectangle {
     y:-width
 
     property int durationPre: {
-        Math.ceil(one.width * 50)
+        Math.ceil(width * Workspace.speedConstant)
     }
     property double durationPost: {
-        Math.ceil(conveyorHeight * 50)
+        Math.ceil(conveyorHeight * Workspace.speedConstant)
     }
     property var oneAnim: NumberAnimation {
 
@@ -41,7 +42,7 @@ Rectangle {
     Image {
         id: cover
 
-        property bool animation: one.animation
+        property bool animation: parent.animation
         property int boomSpeed: 400
 
         OpacityAnimator {
@@ -86,18 +87,17 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                console.log(scene.color + " " + col)
-                if(scene.color == col)
-                    scores++
+                console.log(Workspace.scene.color  + " =? " + col)
+                if(Workspace.scene.color === col)
+                    Workspace.scores++
                 else
-                    lifeIncrease()
+                    Workspace.lifeIncrease()
                 optAnim.start()
                 pulseEmitter.pulse(cover.boomSpeed)
                 optAnim.onStopped.connect(
                     function(){
                         boomed()
                     })
-
             }
         }
 

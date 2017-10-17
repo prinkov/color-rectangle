@@ -3,14 +3,22 @@ import QtQuick.Controls.Material 2.0
 
 import "../templates"
 
+import xyz.prinkov 1.0
+
 Rectangle {
     id: scene
 
-    property int countLines: 7
-    property int scores: 0
-    property int life: 3
     property var colors: ["black", "blue", "green", "orange", "pink", "purple", "red", "white", "yellow"]
     property string color: colors[3]
+    property var rowLines: rowLinesView
+
+    Component.onCompleted: {
+        Workspace.scene = scene
+        kernel.createConv()
+        Workspace.onDie.connect( function(){
+            rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
+        })
+    }
 
     Image {
         anchors.fill: parent
@@ -26,6 +34,9 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
+            onClicked: {
+                kernel.createConv()
+            }
         }
 
         Rectangle {
@@ -33,7 +44,6 @@ Rectangle {
             color: Material.color(Material.BlueGrey)
             opacity: 0.6
         }
-
 
         Image {
             id: pauseIcon
@@ -54,7 +64,7 @@ Rectangle {
         }
 
         Text {
-            text: life
+            text: Workspace.lifes
             font.family: mainFont.name
             anchors.right: multiplyTxt.left
             anchors.leftMargin: 0
@@ -104,40 +114,25 @@ Rectangle {
             }
 
             Text {
-                text: scores
+                text: Workspace.scores
                 color: blockIcon.getColor()
                 font.family: mainFont.name
                 anchors.left: blockIcon.right
                 anchors.leftMargin: 5
                 anchors.verticalCenter: parent.verticalCenter
-
                 font.pixelSize: heartIcon.height
             }
         }
     }
 
     Row {
+        id: rowLinesView
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.horizontalCenter: parent.horizontalCenter
-        width: countLines * parent.width / 7
+        width:  parent.width / kernel.curLines
         height: parent.height
-//        anchors.fill: parent
-        Repeater {
-            model: countLines
-            Conveyor {
-                id: yt
-                number: index
-                width: parent.width / countLines
-                height: parent.height
-            }
-        }
-    }
 
-    function lifeIncrease() {
-        life--;
-        if(life == 0)
-            scene.destroy()
     }
 
 }

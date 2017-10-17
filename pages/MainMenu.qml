@@ -7,11 +7,9 @@ import QtQuick.Controls.Material 2.0
 import xyz.prinkov 1.0
 
 import "../templates"
+
 Rectangle {
     id: mainMenu
-
-    Component.onCompleted: {
-    }
 
     Image {
         anchors.fill: parent
@@ -30,6 +28,7 @@ Rectangle {
         height: 40
         color: "transparent"
     }
+
     RectLabel {
         id: colorLbl2
 
@@ -54,9 +53,12 @@ Rectangle {
             height: 35
             width: parent.width
             text: "continue"
+            enabled: Workspace.contin
+            opacity: Workspace.contin ? 1 : 0.5
             anchors.horizontalCenter: parent.horizontalCenter
 
             onDestroyStopped: {
+                rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
             }
 
             MouseArea {
@@ -80,9 +82,9 @@ Rectangle {
             Material.background: Material.Green
 
             onDestroyStopped: {
+                Workspace.newGame()
                 rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
             }
-
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
