@@ -25,7 +25,6 @@ function createBlock(conv) {
     t.conveyorHeight = conv.height
     t.oneAnim.to = 0;
     t.oneAnim.duration = t.durationPre;
-
     t.twoAnim.target = t;
     t.twoAnim.property = "y";
     t.twoAnim.to =  conv.height;
@@ -36,7 +35,7 @@ function createBlock(conv) {
         t.twoAnim.start()
     })
     t.twoAnim.stopped.connect(function() {
-        if(t.col === workspace.scene.color) {
+        if(t.col === workspace.color) {
             workspace.lifeIncrease()
         }
         t.destroy()
@@ -45,11 +44,4 @@ function createBlock(conv) {
     t.onBoomed.connect(function() {
          t.destroy()
     })
-
-//    t.onDestroy.connect (function() {
-//        workspace.countDestroy++
-//        if(workspace.countDestroy / curLines == 50)
-//            workspace.speedIncrease()
-//    })
-
 }

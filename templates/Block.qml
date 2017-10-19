@@ -6,7 +6,7 @@ import xyz.prinkov 1.0
 
 Rectangle {
     property int number
-    property bool animation: true
+    property bool animation: false
 
     signal boomed
 
@@ -87,8 +87,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                console.log(Workspace.scene.color  + " =? " + col)
-                if(Workspace.scene.color === col)
+                console.log(Workspace.color  + " =? " + col)
+                if(Workspace.color === col)
                     Workspace.scores++
                 else
                     Workspace.lifeIncrease()
@@ -118,12 +118,12 @@ Rectangle {
 
         RotationAnimator {
                id: start
-               target: cover;
+               target: cover.parent;
                onStopped: stop.start()
            }
         RotationAnimator {
                id: stop
-               target: cover;
+               target: cover.parent;
                onStopped: start.start()
            }
 

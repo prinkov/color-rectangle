@@ -7,14 +7,14 @@ import xyz.prinkov 1.0
 
 Rectangle {
     id: scene
-
-    property var colors: ["black", "blue", "green", "orange", "pink", "purple", "red", "white", "yellow"]
-    property string color: colors[3]
     property var rowLines: rowLinesView
 
     Component.onCompleted: {
         Workspace.scene = scene
         kernel.createConv()
+
+
+
         Workspace.onDie.connect( function(){
             rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
         })
@@ -107,7 +107,7 @@ Rectangle {
                 animation: true
                 height: parent.height/2
                 width: parent.height/2
-                col: scene.color
+                col: Workspace.color
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 anchors.verticalCenter: parent.verticalCenter

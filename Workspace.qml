@@ -7,7 +7,8 @@ QtObject {
     property bool contin: false
     property int speedConstant: 20
     property int countDestroy: 0
-
+    property var colors: ["black", "blue", "green", "orange", "pink", "purple", "red", "white", "yellow"]
+    property string color: colors[3]
     property var scene
     signal die
 
@@ -27,7 +28,6 @@ QtObject {
     }
 
     function speedIncrease() {
-        console.log(speedConstant)
         speedConstant--
     }
 
