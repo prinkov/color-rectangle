@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fonts/ARCADECLASSIC.TTF</file>
+        <file>fonts/ARCADERUS.ttf</file>
+    </qresource>
+</RCC>
