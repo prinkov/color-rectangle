@@ -130,7 +130,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.horizontalCenter: parent.horizontalCenter
-        width:  parent.width / kernel.curLines
+        width:  parent.width
         height: parent.height
 
     }

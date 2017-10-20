@@ -1,19 +1,19 @@
 var workspace
-var curLines
-var maxLines = 7
+var curLines = 0
+var maxLines = 3
 function init(workspace_) {
     workspace = workspace_
 }
 
 function createConv() {
-    if(curLines >= maxLines)
-        return;
     var convComponent = Qt.createComponent("qrc:/templates/Conveyor.qml");
-    var conv = convComponent.createObject(workspace.scene.rowLines);
-    conv.width =  workspace.scene.width / maxLines
-    conv.height = workspace.scene.height
-    createBlock(conv)
-    curLines++
+    for(curLines = 0; curLines < maxLines; curLines++ ) {
+        var conv = convComponent.createObject(workspace.scene.rowLines);
+        conv.width =  workspace.scene.width / maxLines
+        conv.height = workspace.scene.height
+        createBlock(conv)
+    }
+
 }
 
 function createBlock(conv) {

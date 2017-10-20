@@ -5,20 +5,13 @@ import QtQuick.Particles 2.0
 import xyz.prinkov 1.0
 
 Rectangle {
-    property int number
     property bool animation: false
 
     signal boomed
-
     property int conveyorHeight: 0
-    property var colors: ["black", "blue", "green", "orange", "pink", "purple", "red", "white", "yellow"]
-
-    property variant colorCode: {"black":"#000000", "blue":"#0055a5", "green":"#69bd31",
-                                 "orange":"#f27500", "pink":"#f22477", "purple":"#6f2b8e", "red":"#c51230",
-                                 "white":"#ffffff", "yellow":"#fff000"}
 
     property string col: {
-        colors[Math.ceil(Math.random()*8)]
+        Workspace.colors[Math.ceil(Math.random()*8)]
     }
 
     color: "transparent"
@@ -42,7 +35,6 @@ Rectangle {
     Image {
         id: cover
 
-        property bool animation: parent.animation
         property int boomSpeed: 400
 
         OpacityAnimator {
@@ -54,13 +46,6 @@ Rectangle {
             running: false
           }
 
-        SequentialAnimation on width {
-            id: moving
-            running: animation
-            loops: Animation.Infinite
-            NumberAnimation { from: width * 1; to: width * 1.1; duration: 800; easing.type: Easing.InOutQuad }
-            NumberAnimation { from: width * 1.1; to: width * 1; duration: 1000; easing.type: Easing.InOutQuad }
-        }
 
         ParticleSystem {
             id: particles
@@ -105,28 +90,6 @@ Rectangle {
         fillMode: Image.PreserveAspectFit
         antialiasing: true
         source: "qrc:/images/colors/"+col+".png"
-        Component.onCompleted: {
-            start.duration = getRnd(200) + 400
-            stop.duration = start.duration
-            start.from = 0 - getRnd(20)
-            start.to = getRnd(30)
-            stop.from = start.to
-            stop.to = start.from
-            if(animation)
-                start.start()
-        }
-
-        RotationAnimator {
-               id: start
-               target: cover.parent;
-               onStopped: stop.start()
-           }
-        RotationAnimator {
-               id: stop
-               target: cover.parent;
-               onStopped: start.start()
-           }
-
     }
 
     function getRnd(n) {
@@ -134,11 +97,7 @@ Rectangle {
     }
 
     function getColor() {
-       return colorCode[col]
-    }
-
-    function getColors() {
-        return colors
+       return Workspace.colorCode[col]
     }
 
 }

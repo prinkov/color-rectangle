@@ -4,8 +4,12 @@ import QtQuick.Particles 2.0
 Image {
     id: letter
     property string let: "c"
-    property bool animation: false
+    property bool animation: true
     property int boomSpeed: 400
+    rotation: animation ? getRnd(-30) : 0
+    property int fromRotation: rotation
+    property int toRotation: getRnd(30)
+
 
     OpacityAnimator {
         id: optAnim
@@ -61,27 +65,29 @@ Image {
 
     opacity: !(let == " ") ? 1 : 0
 
-    Component.onCompleted: {
-        start.duration = getRnd(200) + 400
-        stop.duration = start.duration
-        start.from = 0 - getRnd(20)
-        start.to = getRnd(30)
-        stop.from = start.to
-        stop.to = start.from
-        if(animation)
-            start.start()
+    SequentialAnimation {
+        id: rotating
+        running: animation
+        loops: Animation.Infinite
+        RotationAnimator {
+               id: start
+               target: letter;
+               duration: 600
+               from: fromRotation
+               to: toRotation
+               onStopped: stop.start()
+           }
+        RotationAnimator {
+               id: stop
+               duration: start.duration
+               from: toRotation
+               to: fromRotation
+
+               target: letter;
+               onStopped: start.start()
+           }
     }
 
-    RotationAnimator {
-           id: start
-           target: letter;
-           onStopped: stop.start()
-       }
-    RotationAnimator {
-           id: stop
-           target: letter;
-           onStopped: start.start()
-       }
 
     function getRnd(n) {
         return Math.random() * n;
