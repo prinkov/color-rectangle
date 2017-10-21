@@ -30,4 +30,8 @@ QtObject {
             }
         )
     }
+
+    function saveWorkspace(workspace) {
+        console.log("saving progress")
+    }
 }

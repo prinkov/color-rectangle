@@ -35,54 +35,27 @@ Rectangle {
     Image {
         id: cover
 
-        property int boomSpeed: 400
-
         OpacityAnimator {
-            id: optAnim
-            target: cover;
-            from: cover.opacity;
-            to: 0;
-            duration: cover.boomSpeed
+            id: ex
+            target: cover
+            duration: 400
+            from: cover.opacity
+            to: 0
             running: false
-          }
-
-
-        ParticleSystem {
-            id: particles
-            anchors.fill: parent
-            ImageParticle {
-                source: "qrc:///particleresources/star.png"
-                alpha: 0
-                colorVariation: 0.6
-            }
-
-            Emitter {
-                id: pulseEmitter
-                x: parent.width/2
-                y: 2*parent.height/3
-                emitRate: 1000
-                lifeSpan: 2000
-                enabled: false
-                velocity: AngleDirection{magnitude: 24; angleVariation: 360}
-                size: 24
-                sizeVariation: 8
-
-            }
         }
+
         MouseArea {
             anchors.fill: parent
             onClicked: {
                 console.log(Workspace.color  + " =? " + col)
                 if(Workspace.color === col)
-                    Workspace.scores++
+                    Workspace.scoreIncrease()
                 else
-                    Workspace.lifeIncrease()
-                optAnim.start()
-                pulseEmitter.pulse(cover.boomSpeed)
-                optAnim.onStopped.connect(
-                    function(){
-                        boomed()
-                    })
+                    Workspace.lifeDecrease()
+                ex.start()
+                ex.onStopped.connect(function() {
+                    boomed()
+                })
             }
         }
 
@@ -95,9 +68,4 @@ Rectangle {
     function getRnd(n) {
         return Math.random() * n;
     }
-
-    function getColor() {
-       return Workspace.colorCode[col]
-    }
-
 }

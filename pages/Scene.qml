@@ -13,8 +13,6 @@ Rectangle {
         Workspace.scene = scene
         kernel.createConv()
 
-
-
         Workspace.onDie.connect( function(){
             rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
         })
@@ -27,7 +25,7 @@ Rectangle {
 
     Rectangle {
         id: panel
-        height: 50
+        height: parent.width / kernel.maxLines
         width: parent.width
         color: "transparent"
         z: 80
@@ -115,7 +113,7 @@ Rectangle {
 
             Text {
                 text: Workspace.scores
-                color: blockIcon.getColor()
+                color: blockIcon.col
                 font.family: mainFont.name
                 anchors.left: blockIcon.right
                 anchors.leftMargin: 5
@@ -134,5 +132,7 @@ Rectangle {
         height: parent.height
 
     }
+
+
 
 }
