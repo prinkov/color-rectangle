@@ -71,10 +71,10 @@ ApplicationWindow {
     }
 
     Component.onDestruction: {
-        Setting.saveWorkspace()
+
     }
 
     onFocusObjectChanged: {
-        console.log("save")
+
     }
 }

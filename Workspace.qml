@@ -2,6 +2,7 @@ pragma Singleton
 import QtQuick 2.7
 
 QtObject {
+
     property int scores: 0
     property int lifes: 3
     property bool contin: false
@@ -16,13 +17,19 @@ QtObject {
     property string color: colors[3]
     property var scene
     signal die
+    property bool mayCreate: true
+    property int curLines: 0
+    property int maxLines: 6
+
 
     function newGame() {
         boomCount = 0
+        mayCreate = true
         scores = 0
         lifes = 3
         contin = true
         speedConstant = 8
+        curLines = 0
     }
 
     function scoreIncrease() {
@@ -38,11 +45,18 @@ QtObject {
     }
 
     function boomIncrease() {
-        boomCount++
-        if(boomCount < 400)
-            if(boomCount % 50 == 0) {
-                speedConstant--
-                console.log("speed was changed to " + speedConstant)
+        boomCount++;
+        if(boomCount < 20 * maxLines) {
+            if(boomCount % (20 * curLines) == 0) {
+                boomCount = 0
+                mayCreate = false;
             }
+        } else {
+            if(boomCount == 120 * maxLines + 20 * maxLines && speedConstant > 3) {
+                boomCount = 20 * maxLines;
+                mayCreate = false;
+                speedConstant--;
+            }
+        }
     }
 }

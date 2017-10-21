@@ -1,19 +1,19 @@
 var workspace
-var curLines = 0
-var maxLines = 6
 function init(workspace_) {
     workspace = workspace_
 }
 
 function createConv() {
-    if(curLines == maxLines)
+    if(workspace.curLines == workspace.maxLines)
         return
     var convComponent = Qt.createComponent("qrc:/templates/Conveyor.qml");
         var conv = convComponent.createObject(workspace.scene.rowLines);
-        conv.width =  workspace.scene.width / maxLines
+        conv.width =  workspace.scene.width / workspace.maxLines
         conv.height = workspace.scene.height
-        createBlock(conv)
-        curLines++
+        if(workspace.curLines == 0)
+            var t = createBlock(conv)
+        workspace.curLines++
+        return conv
 }
 
 function createBlock(conv) {
@@ -31,7 +31,12 @@ function createBlock(conv) {
     t.twoAnim.duration = t.durationPost
     t.oneAnim.start()
     t.oneAnim.stopped.connect(function() {
-        var g = createBlock(conv)
+        if(workspace.mayCreate) {
+            var g = createBlock(conv)
+        } else if(!workspace.scene.timer.running){
+            console.log("i'm started")
+            workspace.scene.timer.start()
+        }
         t.twoAnim.start()
     })
     t.twoAnim.stopped.connect(function() {
@@ -39,6 +44,8 @@ function createBlock(conv) {
             workspace.lifeDecrease()
         }
         t.destroy()
+        workspace.boomIncrease()
+
     })
 
     t.onBoomed.connect(function() {

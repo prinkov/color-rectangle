@@ -11,8 +11,7 @@ Rectangle {
 
     Component.onCompleted: {
         Workspace.scene = scene
-        kernel.createConv()
-
+        createConv()
         Workspace.onDie.connect( function(){
             rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
         })
@@ -22,20 +21,13 @@ Rectangle {
         anchors.fill: parent
         source: "qrc:/images/background.png"
     }
-
+//    color: "black"
     Rectangle {
         id: panel
-        height: parent.width / kernel.maxLines
+        height: parent.width / Workspace.maxLines
         width: parent.width
         color: "transparent"
         z: 80
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                kernel.createConv()
-            }
-        }
 
         Rectangle {
             anchors.fill: parent
@@ -133,6 +125,22 @@ Rectangle {
 
     }
 
+    property var timer: Timer {
+        interval: 1500;
+        running: false;
+        repeat: false
+        onTriggered: {
+            Workspace.mayCreate = true
+            if(Workspace.curLines < Workspace.maxLines)
+                createConv()
+        }
 
+    }
 
+    function createConv() {
+        var conv = kernel.createConv()
+        timer.onTriggered.connect(function() {
+            var t = kernel.createBlock(conv)
+        })
+    }
 }

@@ -5,8 +5,8 @@ import QtQuick.Particles 2.0
 import xyz.prinkov 1.0
 
 Rectangle {
-    property bool animation: false
-
+    property bool animation: true
+    property int number: 0
     signal boomed
     property int conveyorHeight: 0
 
@@ -31,10 +31,26 @@ Rectangle {
     property var twoAnim: NumberAnimation {
     }
 
+
+    //todo корректировка чувствительности
+    MouseArea {
+        anchors.fill: parent
+        onPressed: {
+            console.log(Workspace.color  + " =? " + col)
+            if(Workspace.color === col)
+                Workspace.scoreIncrease()
+            else
+                Workspace.lifeDecrease()
+            ex.start()
+            ex.onStopped.connect(function() {
+                boomed()
+            })
+        }
+    }
+
    //---------
     Image {
         id: cover
-
         OpacityAnimator {
             id: ex
             target: cover
@@ -42,21 +58,6 @@ Rectangle {
             from: cover.opacity
             to: 0
             running: false
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                console.log(Workspace.color  + " =? " + col)
-                if(Workspace.color === col)
-                    Workspace.scoreIncrease()
-                else
-                    Workspace.lifeDecrease()
-                ex.start()
-                ex.onStopped.connect(function() {
-                    boomed()
-                })
-            }
         }
 
         height: parent.height
