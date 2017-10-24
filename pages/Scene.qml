@@ -1,5 +1,4 @@
 import QtQuick 2.7
-import QtQuick.Controls.Material 2.0
 
 import "../templates"
 
@@ -8,20 +7,21 @@ import xyz.prinkov 1.0
 Rectangle {
     id: scene
     property var rowLines: rowLinesView
-
+    RectWindow {
+        onSelected: {
+            createConv()
+        }
+    }
     Component.onCompleted: {
         Workspace.scene = scene
-        createConv()
-        Workspace.onDie.connect( function(){
-            rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
-        })
+
     }
 
     Image {
         anchors.fill: parent
         source: "qrc:/images/background.png"
     }
-//    color: "black"
+
     Rectangle {
         id: panel
         height: parent.width / Workspace.maxLines
@@ -31,7 +31,7 @@ Rectangle {
 
         Rectangle {
             anchors.fill: parent
-            color: Material.color(Material.BlueGrey)
+            color: "#607D8B"
             opacity: 0.6
         }
 
@@ -122,7 +122,6 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         width:  parent.width
         height: parent.height
-
     }
 
     property var timer: Timer {

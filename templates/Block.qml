@@ -1,5 +1,4 @@
 import QtQuick 2.7
-import QtQuick.Controls.Material 2.0
 import QtQuick.Particles 2.0
 
 import xyz.prinkov 1.0
@@ -11,7 +10,8 @@ Rectangle {
     property int conveyorHeight: 0
 
     property string col: {
-        Workspace.colors[Math.ceil(Math.random()*8)]
+
+        Workspace.colors[Math.ceil(Math.random() * 9) - 1]
     }
 
     color: "transparent"
@@ -36,11 +36,14 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onPressed: {
-            console.log(Workspace.color  + " =? " + col)
-            if(Workspace.color === col)
-                Workspace.scoreIncrease()
-            else
-                Workspace.lifeDecrease()
+            if(Workspace.color) {
+                console.log(Workspace.color  + " =? " + col)
+                if(Workspace.color === col) {
+                    Workspace.scoreIncrease()
+                    Vibrator.vibrate(50)
+                } else
+                    Workspace.lifeDecrease()
+            }
             ex.start()
             ex.onStopped.connect(function() {
                 boomed()
@@ -54,7 +57,7 @@ Rectangle {
         OpacityAnimator {
             id: ex
             target: cover
-            duration: 400
+            duration: 300
             from: cover.opacity
             to: 0
             running: false
@@ -63,7 +66,7 @@ Rectangle {
         height: parent.height
         fillMode: Image.PreserveAspectFit
         antialiasing: true
-        source: "qrc:/images/colors/"+col+".png"
+        source: col ? "qrc:/images/colors/"+col+".png":"qrc:/images/colors/black.png"
     }
 
     function getRnd(n) {

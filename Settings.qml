@@ -5,6 +5,8 @@ import QtQuick.LocalStorage 2.0
 QtObject {
     property int screenWidth : 320
     property int screenHeight : 480
+    property int recordForThisPhone: 0
+
     property string name: "Player"
     property bool mute: false
     property int speed: 0
@@ -12,7 +14,12 @@ QtObject {
 
     Component.onCompleted:  {
         db.transaction( function(tx) {
+
             tx.executeSql('CREATE TABLE IF NOT EXISTS Setting(option TEXT, value INTEGER)');
+
+            tx.executeSql('CREATE TABLE IF NOT EXISTS Records(id INTEGER, name TEXT, score INTEGER, color TEXT)');
+//            tx.executeSql('DROP TABLE Records');
+
             var rs = tx.executeSql('SELECT value FROM Setting WHERE option="mute"');
             if(rs.rows.item(0)) {
                 mute = rs.rows.item(0).value
@@ -25,7 +32,7 @@ QtObject {
     function switchMute() {
         db.transaction(
             function(tx) {
-                tx.executeSql('UPDATE  Setting SET value = '+(!mute+0)+' WHERE option="mute"');
+                tx.executeSql('UPDATE Setting SET value = '+(!mute+0)+' WHERE option="mute"');
                 mute = !mute;
             }
         )

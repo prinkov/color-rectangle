@@ -1,9 +1,10 @@
-QT += qml quick opengl
+QT += qml quick opengl #androidextras
 
 CONFIG += c++11
 
 SOURCES += \
-    main.cpp
+    main.cpp \
+    vibrator.cpp
 
 RESOURCES += qml.qrc \
     images.qrc \
@@ -44,3 +45,6 @@ DISTFILES += \
     android/build.gradle
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+HEADERS += \
+    vibrator.h

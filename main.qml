@@ -17,7 +17,14 @@ ApplicationWindow {
 
     Component.onCompleted: {
         kernel.init(Workspace)
+        Workspace.onDie.connect( function(){
+            if(Workspace.checkRecord(Workspace.scores)) {
+                Workspace.saveRecord("Alex", Workspace.color, Workspace.scores)
+            }
+            rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
+        })
     }
+
 
     FontLoader {
         id: mainFont

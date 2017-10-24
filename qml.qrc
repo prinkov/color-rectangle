@@ -12,5 +12,7 @@
         <file>templates/Animation.qml</file>
         <file>Workspace.qml</file>
         <file>js/Kernel.js</file>
+        <file>templates/RectWindow.qml</file>
+        <file>pages/Raiting.qml</file>
     </qresource>
 </RCC>

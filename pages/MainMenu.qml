@@ -2,7 +2,6 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.0
-import QtQuick.Controls.Material 2.0
 
 import xyz.prinkov 1.0
 
@@ -79,8 +78,6 @@ Rectangle {
 
             anchors.horizontalCenter: parent.horizontalCenter
 
-            Material.background: Material.Green
-
             onDestroyStopped: {
                 Workspace.newGame()
                 rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
@@ -102,7 +99,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
 
             onDestroyStopped: {
-
+                rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/Raiting.qml"))
             }
 
             MouseArea {
@@ -111,7 +108,6 @@ Rectangle {
                     result.destroyAll()
                 }
             }
-            Material.background: Material.Blue
         }
 
         RectLabel {
@@ -121,8 +117,6 @@ Rectangle {
             width: parent.width
             text: "exit"
             anchors.horizontalCenter: parent.horizontalCenter
-
-            Material.background: Material.Red
 
             onDestroyStopped: {
                 Qt.quit()
