@@ -79,5 +79,7 @@
         <file>images/stop.png</file>
         <file>images/en_alpha/ .png</file>
         <file>images/return.png</file>
+        <file>images/checked.png</file>
+        <file>images/reload.png</file>
     </qresource>
 </RCC>

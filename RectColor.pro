@@ -8,7 +8,8 @@ SOURCES += \
 
 RESOURCES += qml.qrc \
     images.qrc \
-    fonts.qrc
+    fonts.qrc \
+    music.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

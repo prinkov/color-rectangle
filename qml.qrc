@@ -14,5 +14,7 @@
         <file>js/Kernel.js</file>
         <file>templates/RectWindow.qml</file>
         <file>pages/Raiting.qml</file>
+        <file>templates/InputWindow.qml</file>
+        <file>templates/RestartWindow.qml</file>
     </qresource>
 </RCC>

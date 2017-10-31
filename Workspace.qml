@@ -3,6 +3,8 @@ import QtQuick 2.7
 
 import xyz.prinkov 1.0
 
+import QtMultimedia 5.8
+
 QtObject {
 
     property int scores: 0
@@ -38,11 +40,12 @@ QtObject {
     }
 
     function lifeDecrease() {
-        lifes--
-        if(lifes == 0) {
+        if(lifes == 1) {
             die()
             contin = false
         }
+        if(lifes != 0)
+            lifes--
     }
 
     function boomIncrease() {
@@ -95,5 +98,10 @@ QtObject {
         })
         return rs.rows.item(0)
     }
+
+    property var playMusic: MediaPlayer {
+          source: "qrc:/music/MainTheme.mp3"
+          autoPlay: !Settings.mute
+      }
 
 }

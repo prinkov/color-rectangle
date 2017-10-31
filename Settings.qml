@@ -1,7 +1,7 @@
 pragma Singleton
 import QtQuick 2.7
 import QtQuick.LocalStorage 2.0
-
+import xyz.prinkov 1.0
 QtObject {
     property int screenWidth : 320
     property int screenHeight : 480
@@ -36,6 +36,11 @@ QtObject {
                 mute = !mute;
             }
         )
+        if(mute)
+            Workspace.playMusic.stop()
+        else
+            Workspace.playMusic.play()
+
     }
 
     function saveWorkspace(workspace) {

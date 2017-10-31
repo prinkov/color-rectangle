@@ -40,7 +40,7 @@ Rectangle {
                 console.log(Workspace.color  + " =? " + col)
                 if(Workspace.color === col) {
                     Workspace.scoreIncrease()
-                    Vibrator.vibrate(50)
+                    Vibrator.vibrate(60)
                 } else
                     Workspace.lifeDecrease()
             }

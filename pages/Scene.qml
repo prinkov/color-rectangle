@@ -12,6 +12,7 @@ Rectangle {
             createConv()
         }
     }
+
     Component.onCompleted: {
         Workspace.scene = scene
 

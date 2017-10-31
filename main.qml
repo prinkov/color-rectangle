@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
+
 import "./js/Kernel.js" as Kernel
 
 import xyz.prinkov 1.0
@@ -17,11 +18,23 @@ ApplicationWindow {
 
     Component.onCompleted: {
         kernel.init(Workspace)
-        Workspace.onDie.connect( function(){
+        Workspace.onDie.connect( function() {
+
             if(Workspace.checkRecord(Workspace.scores)) {
-                Workspace.saveRecord("Alex", Workspace.color, Workspace.scores)
+                var windowComponent = Qt.createComponent("qrc:/templates/InputWindow.qml");
+                var window = windowComponent.createObject(Workspace.scene);
+                window.onCloseWindow.connect(function(){
+                    window.destroy();
+                    rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
+
+                })
+            } else {
+                var windowComponent = Qt.createComponent("qrc:/templates/RestartWindow.qml");
+                var window = windowComponent.createObject(Workspace.scene);
+                window.onCloseWindow.connect(function(){
+                    window.destroy();
+                })
             }
-            rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
         })
     }
 
@@ -42,6 +55,24 @@ ApplicationWindow {
         initialItem: Qt.resolvedUrl("qrc:/pages/MainMenu.qml")
 
         pushEnter:  Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 200
+            }
+        }
+
+        replaceExit: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 1
+                to: 0
+                duration: 200
+            }
+        }
+
+        replaceEnter:  Transition {
             PropertyAnimation {
                 property: "opacity"
                 from: 0
