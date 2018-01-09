@@ -8,7 +8,7 @@ import QtMultimedia 5.8
 QtObject {
 
     property int scores: 0
-    property int lifes: 3
+    property int lifes: 5
     property bool contin: false
     property int speedConstant: 4
     property int boomCount
@@ -29,7 +29,7 @@ QtObject {
         boomCount = 0
         mayCreate = true
         scores = 0
-        lifes = 5
+        lifes = 15
         contin = true
         speedConstant = 4
         curLines = 0

@@ -109,10 +109,8 @@ ApplicationWindow {
     }
 
     Component.onDestruction: {
-
     }
 
     onFocusObjectChanged: {
-
     }
 }

@@ -45,8 +45,8 @@ Item {
                 id: scoresText
                 font.family: mainFont.name
                 font.pixelSize: 26
-                color: Workspace.Color; //"#1e0478"
-                anchors.horizontalCenter: parent.horizontalCenter
+                color: "#1e0478"
+                anchors.horizoWorkspace.colorntalCenter: parent.horizontalCenter
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 horizontalAlignment: Text.AlignHCenter
@@ -67,11 +67,10 @@ Item {
             TextField {
                 id: nameText
                 horizontalAlignment: TextField.horizontalAlignment
-                color: Workspace.color
+                color: "#000000"
                 background: Rectangle {
                         anchors.fill: parent
                         radius: width * 0.05
-
                 }
 
                 placeholderText: "nickname"
