@@ -48,6 +48,7 @@ Rectangle {
             ex.onStopped.connect(function() {
                 try{
                     boomed()
+
                 } catch(e) {
                     console.log("is already boomed")
                 }

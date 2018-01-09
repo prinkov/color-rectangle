@@ -4,6 +4,7 @@ import QtQuick.Controls 2.0
 import xyz.prinkov 1.0
 
 Rectangle {
+    property variant localRecord: []
     id: raiting
 
     Image {
@@ -11,10 +12,8 @@ Rectangle {
         source: "qrc:/images/background.png"
     }
 
-    property var localRecord
-
     Component.onCompleted: {
-        localRecord = Workspace.getRecord()
+        localRecord[0] = Workspace.getRecord(0)
     }
 
     Button {
@@ -32,13 +31,15 @@ Rectangle {
             rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
         }
     }
+
     Rectangle {
         color: "transparent"
         anchors.top: back.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: 40
+        anchors.margins: 20
+        anchors.bottomMargin: 150
         anchors.topMargin: 20
 
         Rectangle {
@@ -60,28 +61,22 @@ Rectangle {
 
             text: "On  this  device"
         }
-        Text {
-            id: scrTD
-            text: "1. "+localRecord.name + "       " + localRecord.score+""
-            color: localRecord.color
-            font.family: mainFont.name
-            font.pixelSize: 26
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: lblTD.bottom
-            anchors.topMargin: 5
-        }
 
-        Text {
-            id: lblW
-            color: "white"
-            font.family: mainFont.name
-            font.pixelSize: 28
-            font.bold: true
-            anchors.top: scrTD.bottom
-            anchors.topMargin: 10
-            anchors.horizontalCenter: parent.horizontalCenter
+//        Column {
+//            anchors.topMargin: 5
+//            anchors.top: lblTD.bottom
+//            Repeater {
+//                model: 5
+//                Text {
+//                    id: scrTD
+//                    text: "1. "+localRecord[0].name + "       " + localRecord[0].score + ""
+//                    color: localRecord[0].color
+//                    font.family: mainFont.name
+//                    font.pixelSize: 26
+//                    anchors.horizontalCenter: parent.horizontalCenter
 
-            text: "Worldwide"
-        }
+//                }
+//            }
+//        }
     }
 }

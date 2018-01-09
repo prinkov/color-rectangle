@@ -1,9 +1,7 @@
 /* todo fo release:
+ *  raiting tables;
  *  continue btn;
- *  new game with equal color;
  *  add music;
- *  come up main title;
- *  raiting; --fix empty name;
  *  testing android;
  *  testing ios;
  * */

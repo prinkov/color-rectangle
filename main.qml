@@ -10,6 +10,7 @@ import xyz.prinkov 1.0
 ApplicationWindow {
     id: application
     visible: true
+
     width: 320 // Settings.screenWidth
     height: 480 //Settings.screenHeight
     title: "Color Pick"
@@ -19,7 +20,6 @@ ApplicationWindow {
     Component.onCompleted: {
         kernel.init(Workspace)
         Workspace.onDie.connect( function() {
-
             if(Workspace.checkRecord(Workspace.scores)) {
                 var windowComponent = Qt.createComponent("qrc:/templates/InputWindow.qml");
                 var window = windowComponent.createObject(Workspace.scene);
@@ -37,7 +37,6 @@ ApplicationWindow {
             }
         })
     }
-
 
     FontLoader {
         id: mainFont

@@ -46,7 +46,7 @@ Item {
                 font.family: mainFont.name
                 font.pixelSize: 26
                 color: "#1e0478"
-                anchors.horizoWorkspace.colorntalCenter: parent.horizontalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 horizontalAlignment: Text.AlignHCenter
@@ -100,6 +100,10 @@ Item {
             }
 
             onClicked: {
+                if(nameText.text.length == 0)
+                    nameText.text = "unnamed"
+                if(nameText.text.length > 12)
+                    nameText.text = nameText.text.substring(0, 12)
                 Workspace.saveRecord(nameText.text, Workspace.color,
                                      Workspace.scores)
                 closeWindow()

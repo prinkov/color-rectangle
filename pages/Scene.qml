@@ -28,6 +28,7 @@ Rectangle {
         height: parent.width / Workspace.maxLines
         width: parent.width
         color: "transparent"
+
         z: 80
 
         Rectangle {
@@ -102,6 +103,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 anchors.verticalCenter: parent.verticalCenter
+                enabled: false
             }
 
             Text {

@@ -80,7 +80,7 @@ QtObject {
     function checkRecord(probNewRecord) {
         var ret;
          Settings.db.transaction(function(tx) {
-            var rs = tx.executeSql('SELECT * FROM Records');
+            var rs = tx.executeSql('SELECT * FROM Records')
             if(!rs.rows.item(0))
                  ret = true
             else if(rs.rows.item(0).score < probNewRecord)
@@ -91,12 +91,12 @@ QtObject {
         return ret
     }
 
-    function getRecord() {
+    function getRecord(n) {
         var rs;
         Settings.db.transaction( function(tx) {
             rs = tx.executeSql('SELECT * FROM Records');
         })
-        return rs.rows.item(0)
+        return rs.rows.item(n)
     }
 
     property var playMusic: MediaPlayer {
