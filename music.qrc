@@ -1,8 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>music/MainTheme.mp3</file>
-        <file>music/дополнительная жизнь.wav</file>
         <file>music/Рекорд .wav</file>
         <file>music/Потеря жизни .wav</file>
+        <file>music/addlife.wav</file>
     </qresource>
 </RCC>

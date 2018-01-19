@@ -36,10 +36,10 @@ QtObject {
                 mute = !mute;
             }
         )
-        if(mute)
-            Workspace.playMusic.stop()
-        else
-            Workspace.playMusic.play()
+//        if(mute)
+//            Workspace.playMusic.stop()
+//        else
+//            Workspace.playMusic.play()
 
     }
 

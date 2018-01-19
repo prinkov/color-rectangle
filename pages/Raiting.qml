@@ -4,44 +4,48 @@ import QtQuick.Controls 2.0
 import xyz.prinkov 1.0
 
 Rectangle {
-    property variant localRecord: []
-    id: raiting
 
+    id: raiting
+    property variant localRecord: [
+     {
+         "name": "ivan",
+         "color": "blue",
+         "score" : 250
+     },
+     {
+         "name": "Semenov-Tyanshan",
+         "color": "red",
+         "score" : 100
+     },
+     {
+         "name": "Bolvinov",
+         "color": "yellow",
+         "score" : 50
+     },
+     {
+         "name": "Loxlox",
+         "color": "blue",
+         "score" : 25
+     },
+
+     {
+         "name": "Senina",
+         "color": "white",
+         "score" : 1
+     }
+    ]
     Image {
         anchors.fill: parent
         source: "qrc:/images/background.png"
     }
 
-    Component.onCompleted: {
-        localRecord[0] = Workspace.getRecord(0)
-    }
-
-    Button {
-        id: back
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.margins: 20
-        background: Image {
-            fillMode: Image.PreserveAspectFit
-            width: 60
-            antialiasing: true
-            source: "qrc:/images/return.png"
-        }
-        onClicked: {
-            rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
-        }
-    }
-
     Rectangle {
         color: "transparent"
-        anchors.top: back.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
         anchors.margins: 20
-        anchors.bottomMargin: 150
-        anchors.topMargin: 20
-
+        anchors.verticalCenter: parent.verticalCenter
+        height: parent.height / 2
         Rectangle {
             anchors.fill: parent
             color: "#607D8B"
@@ -62,21 +66,43 @@ Rectangle {
             text: "On  this  device"
         }
 
-//        Column {
-//            anchors.topMargin: 5
-//            anchors.top: lblTD.bottom
-//            Repeater {
-//                model: 5
-//                Text {
-//                    id: scrTD
-//                    text: "1. "+localRecord[0].name + "       " + localRecord[0].score + ""
-//                    color: localRecord[0].color
-//                    font.family: mainFont.name
-//                    font.pixelSize: 26
-//                    anchors.horizontalCenter: parent.horizontalCenter
+        Column {
+            id: raitingCol
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
 
-//                }
-//            }
-//        }
+            Repeater {
+                model: localRecord.length
+                Text {
+                    id: scrTD
+                    text: (index+1) + ". " + localRecord[index].name + " " +
+                        localRecord[index].score
+                    color: localRecord[index].color
+                    font.family: mainFont.name
+                    font.pixelSize: 24
+
+                }
+            }
+        }
     }
+
+
+    Button {
+        id: back
+
+        height: raiting.width / Workspace.maxLines
+        width: raiting.width / Workspace.maxLines
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.margins: 20
+        background: Image {
+            fillMode: Image.PreserveAspectFit
+            antialiasing: true
+            source: "qrc:/images/return.png"
+        }
+        onClicked: {
+            rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/MainMenu.qml"))
+        }
+    }
+
 }

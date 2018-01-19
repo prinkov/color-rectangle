@@ -4,6 +4,7 @@
  *  add music;
  *  testing android;
  *  testing ios;
+ * **swipe back
  * */
 
 #include <QGuiApplication>

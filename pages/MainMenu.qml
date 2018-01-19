@@ -18,7 +18,7 @@ Rectangle {
     RectLabel {
         id: colorLbl
         animation: true
-        text: "color"
+        text: "rect"
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -32,7 +32,7 @@ Rectangle {
         id: colorLbl2
 
         animation: true
-        text: "pick"
+        text: "color"
         anchors.top: colorLbl.bottom
         width: parent.width
         anchors.topMargin: 30

@@ -7,6 +7,8 @@ import QtMultimedia 5.8
 
 QtObject {
 
+
+
     property int scores: 0
     property int lifes: 5
     property bool contin: false
@@ -29,7 +31,7 @@ QtObject {
         boomCount = 0
         mayCreate = true
         scores = 0
-        lifes = 15
+        lifes = 3
         contin = true
         speedConstant = 4
         curLines = 0
@@ -81,6 +83,7 @@ QtObject {
         var ret;
          Settings.db.transaction(function(tx) {
             var rs = tx.executeSql('SELECT * FROM Records')
+             console.log(rs.rows.item(0).score)
             if(!rs.rows.item(0))
                  ret = true
             else if(rs.rows.item(0).score < probNewRecord)
@@ -88,6 +91,7 @@ QtObject {
             else
                 ret = false
          })
+        console.log(ret)
         return ret
     }
 
@@ -99,9 +103,11 @@ QtObject {
         return rs.rows.item(n)
     }
 
-    property var playMusic: MediaPlayer {
-          source: "qrc:/music/MainTheme.mp3"
-          autoPlay: !Settings.mute
-      }
+
+// здесь должна быть главная тема
+//    property var playMusic: MediaPlayer {
+//          source: "qrc:/music/MainTheme.mp3"
+//          autoPlay: !Settings.mute
+//      }
 
 }

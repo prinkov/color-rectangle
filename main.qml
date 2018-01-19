@@ -13,7 +13,7 @@ ApplicationWindow {
 
     width: 320 // Settings.screenWidth
     height: 480 //Settings.screenHeight
-    title: "Color Pick"
+    title: "Rect Color"
 
     property var kernel: Kernel
 
