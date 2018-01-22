@@ -9,11 +9,15 @@ Rectangle {
 
     ListModel {
         id: localRecord
-        ListElement { i : 0; name: "DogDogDogDogDog"; score: 8; txtColor: "red" }
-        ListElement { i : 1; name: "Dog"; score: 8; txtColor: "blue" }
-        ListElement { i : 2; name: "Dog"; score: 8; txtColor: "green" }
-        ListElement { i : 3; name: "Dog"; score: 8; txtColor: "yellow" }
-        ListElement { i : 4; name: "Dog"; score: 8; txtColor: "white" }
+
+    }
+
+    Component.onCompleted: {
+        var count = Workspace.getCountRecord()
+        for(var i = 0; i < count; i++) {
+            var t = Workspace.getRecord(i)
+            localRecord.append({"i": i, "name": t.name, "txtColor" : t.color, "score" : t.score})
+        }
     }
 
     Image {
@@ -59,9 +63,6 @@ Rectangle {
                 color: txtColor
                 font.family: mainFont.name
                 font.pixelSize: 24
-                Component.onCompleted: {
-                    console.log(scrTD.height)
-                }
                 y: 140
             }
         }

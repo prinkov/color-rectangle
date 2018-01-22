@@ -103,6 +103,15 @@ QtObject {
         return rs.rows.item(n)
     }
 
+    function getCountRecord() {
+        var rs;
+        Settings.db.transaction( function(tx) {
+            rs = tx.executeSql('SELECT * FROM Records');
+        })
+        return rs.rows.length
+
+    }
+
 
 // здесь должна быть главная тема
 //    property var playMusic: MediaPlayer {
