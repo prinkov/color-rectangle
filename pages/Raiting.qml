@@ -6,34 +6,16 @@ import xyz.prinkov 1.0
 Rectangle {
 
     id: raiting
-    property variant localRecord: [
-     {
-         "name": "ivan",
-         "color": "blue",
-         "score" : 250
-     },
-     {
-         "name": "Semenov-Tyanshan",
-         "color": "red",
-         "score" : 100
-     },
-     {
-         "name": "Bolvinov",
-         "color": "yellow",
-         "score" : 50
-     },
-     {
-         "name": "Loxlox",
-         "color": "blue",
-         "score" : 25
-     },
 
-     {
-         "name": "Senina",
-         "color": "white",
-         "score" : 1
-     }
-    ]
+    ListModel {
+        id: localRecord
+        ListElement { i : 0; name: "DogDogDogDogDog"; score: 8; txtColor: "red" }
+        ListElement { i : 1; name: "Dog"; score: 8; txtColor: "blue" }
+        ListElement { i : 2; name: "Dog"; score: 8; txtColor: "green" }
+        ListElement { i : 3; name: "Dog"; score: 8; txtColor: "yellow" }
+        ListElement { i : 4; name: "Dog"; score: 8; txtColor: "white" }
+    }
+
     Image {
         anchors.fill: parent
         source: "qrc:/images/background.png"
@@ -59,29 +41,47 @@ Rectangle {
             font.family: mainFont.name
             font.pixelSize: 28
             font.bold: true
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
             anchors.top: parent.top
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
-
             text: "On  this  device"
         }
 
-        Column {
-            id: raitingCol
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+        Component{
+            id: scrDelegate
 
-            Repeater {
-                model: localRecord.length
-                Text {
-                    id: scrTD
-                    text: (index+1) + ". " + localRecord[index].name + " " +
-                        localRecord[index].score
-                    color: localRecord[index].color
-                    font.family: mainFont.name
-                    font.pixelSize: 24
-
+            Text {
+                id: scrTD
+                visible: score > 0
+                text: (i+1) + ". " + name + "  " + score
+                color: txtColor
+                font.family: mainFont.name
+                font.pixelSize: 24
+                Component.onCompleted: {
+                    console.log(scrTD.height)
                 }
+                y: 140
+            }
+        }
+        Item {
+            width: 200
+            height: localRecord.count * 32
+
+            anchors.top: lblTD.bottom
+            anchors.topMargin: 10
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 15
+            anchors.left: parent.left
+            anchors.leftMargin: 15
+
+            ListView {
+                id: ratingView
+                spacing: 4
+                anchors.fill: parent
+                model: localRecord
+                delegate: scrDelegate
             }
         }
     }
@@ -89,7 +89,6 @@ Rectangle {
 
     Button {
         id: back
-
         height: raiting.width / Workspace.maxLines
         width: raiting.width / Workspace.maxLines
         anchors.bottom: parent.bottom
