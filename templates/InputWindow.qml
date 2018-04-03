@@ -51,7 +51,6 @@ Item {
                 anchors.topMargin: 10
                 horizontalAlignment: Text.AlignHCenter
                 text: "Scores: "+Workspace.scores
-
             }
 
         }

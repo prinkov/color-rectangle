@@ -57,7 +57,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
 
             onDestroyStopped: {
-                rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
+
             }
 
             MouseArea {

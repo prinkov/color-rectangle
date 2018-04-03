@@ -14,6 +14,7 @@ Rectangle {
 
     Component.onCompleted: {
         var count = Workspace.getCountRecord()
+        console.log("Raiting.qml:17 count of records + " + count)
         for(var i = 0; i < count; i++) {
             var t = Workspace.getRecord(i)
             localRecord.append({"i": i, "name": t.name, "txtColor" : t.color, "score" : t.score})

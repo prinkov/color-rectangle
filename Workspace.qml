@@ -71,27 +71,61 @@ QtObject {
             return
         Settings.db.transaction( function(tx) {
             var rs = tx.executeSql('SELECT * FROM Records');
-            if(rs.rows.item(0)) {
-                tx.executeSql('UPDATE Records SET name="'+name+'", color="'+color+'", score="'+newRecord+'" WHERE id=1');
-            } else {
-                tx.executeSql('INSERT INTO Records VALUES(?, ?, ?, ?)' , [1, name, newRecord, color]);
+            var j =0;
+            for(var i = 0; i < 5; i++) {
+                if(rs.rows.item(i)) {
+                    if(rs.rows.item(i).score < newRecord) {
+                        for(j = i; j < 4; j++) {
+                            if(rs.rows.item(j)) {
+                                if(rs.rows.item(j+1)) {
+                                    tx.executeSql('UPDATE Records SET name="' + rs.rows.item(j).name
+                                                  +'", color="' + rs.rows.item(j).color + '", score="' +
+                                                  rs.rows.item(j).score + '" WHERE id=' + (j + 1));
+                                    console.log(j +" write at  " + (j+1))
+                                } else {
+                                    tx.executeSql('INSERT INTO Records VALUES(?, ?, ?, ?)' ,
+                                                  [j+1, rs.rows.item(j).name, rs.rows.item(j).score, rs.rows.item(j).color]);
+                                    console.log(j +" write at (unused) " + (j+1))
+
+                                }
+                            } else {
+                                break;
+                            }
+                        }
+                        tx.executeSql('UPDATE Records SET name="' + name
+                                      +'", color="' + color + '", score="' +
+                                      newRecord + '" WHERE id=' + i);
+                        console.log("new write at" + i)
+
+                        return;
+                    }
+                } else {
+                    tx.executeSql('INSERT INTO Records VALUES(?, ?, ?, ?)' ,
+                                  [i, name, newRecord, color]);
+                    console.log("new write at" + i)
+                    return;
+                }
             }
         })
     }
 
     function checkRecord(probNewRecord) {
-        var ret;
+        var ret = false;
          Settings.db.transaction(function(tx) {
-            var rs = tx.executeSql('SELECT * FROM Records')
-             console.log(rs.rows.item(0).score)
-            if(!rs.rows.item(0))
-                 ret = true
-            else if(rs.rows.item(0).score < probNewRecord)
-                ret = true
-            else
-                ret = false
+                var rs = tx.executeSql('SELECT * FROM Records')
+                 for(var i = 0; i < 5; i++) {
+                if(!rs.rows.item(i)) {
+                     ret = true
+                    break;
+                }
+                else if(rs.rows.item(i).score < probNewRecord) {
+                    ret = true
+                    break
+                }
+            }
          })
-        console.log(ret)
+        console.log("Wokspace.qml:96check record "
+                        + probNewRecord + ", return value: " + + ret)
         return ret
     }
 

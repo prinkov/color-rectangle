@@ -13,7 +13,8 @@ function createConv() {
         if(workspace.curLines == 0)
             var t = createBlock(conv)
         workspace.curLines++
-        workspace.scene.rowLines.width = workspace.curLines * workspace.scene.width / workspace.maxLines
+        workspace.scene.rowLines.width = workspace.curLines *
+                workspace.scene.width / workspace.maxLines
         console.log(workspace.scene.rowLines.width)
         return conv
 }

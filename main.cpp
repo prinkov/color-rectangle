@@ -1,5 +1,5 @@
 /* todo fo release:
- *  raiting tables;
+ *  raiting tables; --
  *  continue btn;
  *  add music;
  *  testing android;

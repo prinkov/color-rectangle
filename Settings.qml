@@ -10,7 +10,7 @@ QtObject {
     property string name: "Player"
     property bool mute: false
     property int speed: 0
-    property var db:LocalStorage.openDatabaseSync("mydb", "1.0", "Database for save data for user", 1000000);
+    property var db:LocalStorage.openDatabaseSync("application_db", "1.0", "Database for save data for user", 1000000);
 
     Component.onCompleted:  {
         db.transaction( function(tx) {
