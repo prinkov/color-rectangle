@@ -1,10 +1,10 @@
-QT += qml quick opengl #androidextras
+QT += qml quick opengl androidextras
 
 CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    vibrator.cpp
+    vibrator.cpp \
 
 RESOURCES += qml.qrc \
     images.qrc \
@@ -33,6 +33,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+
 DISTFILES += \
     android/AndroidManifest.xml \
     android/gradle/wrapper/gradle-wrapper.jar \
@@ -43,9 +46,23 @@ DISTFILES += \
     android/gradlew.bat \
     android/AndroidManifest.xml \
     android/res/values/libs.xml \
-    android/build.gradle
-
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+    android/build.gradle \
+    QtAdMob/platform/android/AndroidManifest.xml \
+    QtAdMob/platform/android/gradle/wrapper/gradle-wrapper.jar \
+    QtAdMob/platform/android/gradlew \
+    QtAdMob/platform/android/res/values/libs.xml \
+    QtAdMob/platform/android/res/drawable-hdpi/icon.png \
+    QtAdMob/platform/android/res/drawable-ldpi/icon.png \
+    QtAdMob/platform/android/res/drawable-mdpi/icon.png \
+    QtAdMob/platform/android/gradle/wrapper/gradle-wrapper.properties \
+    QtAdMob/platform/android/build.gradle \
+    QtAdMob/platform/android/gradlew.bat \
+    QtAdMob/platform/android/src/org/dreamdev/QtAdMob/QtAdMobActivity.java \
+    QtAdMob/platform/android/gradle.properties \
+    QtAdMob/platform/android/local.properties \
+    $$ANDROID_PACKAGE_SOURCE_DIR/src/org/dreamdev/QtAdMob/QtAdMobActivity.java \
 
 HEADERS += \
-    vibrator.h
+    vibrator.h \
+
+include(QtAdMob/QtAdMob.pri)

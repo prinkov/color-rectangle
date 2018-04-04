@@ -58,7 +58,8 @@ function createBlock(conv) {
     })
     t.twoAnim.stopped.connect(function() {
         if(t.col === workspace.color) {
-            Vibrator.vibrate(60)
+            if(workspace.lifes !=0 )
+                Vibrator.vibrate(60)
 
             workspace.lifeDecrease()
         }
