@@ -6,6 +6,14 @@ import xyz.prinkov 1.0
 
 Rectangle {
     id: scene
+
+    Rectangle {
+        width: parent.width
+        color: "transparent"
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+    }
+
     property var rowLines: rowLinesView
     RectWindow {
         id: rectWindow

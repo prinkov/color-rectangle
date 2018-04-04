@@ -2,12 +2,14 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
-
+import com.dreamdev.QtAdMobBanner 1.0
+import com.dreamdev.QtAdMobInterstitial 1.0
+import QtQuick.Window 2.2
 import "./js/Kernel.js" as Kernel
 
 import xyz.prinkov 1.0
 
-ApplicationWindow {
+Window {
     id: application
     visible: true
 
@@ -54,6 +56,10 @@ ApplicationWindow {
 
     StackView {
         id: rootWindowStack
+//        width: parent.width
+//        height: parent.height - 50
+//        x: 0
+//        y: 0
         anchors.fill: parent
         initialItem: Qt.resolvedUrl("qrc:/pages/MainMenu.qml")
 
@@ -111,9 +117,32 @@ ApplicationWindow {
         }
     }
 
+
     Component.onDestruction: {
     }
 
     onFocusObjectChanged: {
     }
+
+    Rectangle {
+        id: footer
+        color: "red"
+        height: 50
+        z: 10
+        width: parent.width
+
+        x: 0
+        y: parent.height - 50
+    }
+
+    AdMobBanner {
+            id: banner
+            x: footer.x
+            y: footer.y
+            Component.onCompleted: {
+                banner.unitId = "ca-app-pub-7485900711629006/8288667458"
+                banner.size = AdMobBanner.Banner
+                banner.visible = true
+            }
+     }
 }

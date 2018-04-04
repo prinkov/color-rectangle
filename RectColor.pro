@@ -22,6 +22,7 @@ QML_DESIGNER_IMPORT_PATH =
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += QTADMOB_QML
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -47,19 +48,6 @@ DISTFILES += \
     android/AndroidManifest.xml \
     android/res/values/libs.xml \
     android/build.gradle \
-    QtAdMob/platform/android/AndroidManifest.xml \
-    QtAdMob/platform/android/gradle/wrapper/gradle-wrapper.jar \
-    QtAdMob/platform/android/gradlew \
-    QtAdMob/platform/android/res/values/libs.xml \
-    QtAdMob/platform/android/res/drawable-hdpi/icon.png \
-    QtAdMob/platform/android/res/drawable-ldpi/icon.png \
-    QtAdMob/platform/android/res/drawable-mdpi/icon.png \
-    QtAdMob/platform/android/gradle/wrapper/gradle-wrapper.properties \
-    QtAdMob/platform/android/build.gradle \
-    QtAdMob/platform/android/gradlew.bat \
-    QtAdMob/platform/android/src/org/dreamdev/QtAdMob/QtAdMobActivity.java \
-    QtAdMob/platform/android/gradle.properties \
-    QtAdMob/platform/android/local.properties \
     $$ANDROID_PACKAGE_SOURCE_DIR/src/org/dreamdev/QtAdMob/QtAdMobActivity.java \
 
 HEADERS += \
