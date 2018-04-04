@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>music/Рекорд .wav</file>
-        <file>music/Потеря жизни .wav</file>
         <file>music/addlife.wav</file>
+        <file>music/record.wav</file>
+        <file>music/lost.wav</file>
     </qresource>
 </RCC>

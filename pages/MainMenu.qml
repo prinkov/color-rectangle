@@ -57,6 +57,8 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
 
             onDestroyStopped: {
+                Workspace.continueGame()
+                rootWindowStack.replace(Qt.resolvedUrl("qrc:/pages/Scene.qml"))
 
             }
 

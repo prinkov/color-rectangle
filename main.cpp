@@ -1,10 +1,8 @@
 /* todo fo release:
- *  raiting tables; --
- *  continue btn;
- *  add music;
+ *  add main theme;
  *  testing android;
  *  testing ios;
- * **swipe back
+ *  swipe bkac
  * */
 
 #include <QGuiApplication>

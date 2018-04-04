@@ -18,9 +18,13 @@ ApplicationWindow {
     property var kernel: Kernel
 
     Component.onCompleted: {
+
         kernel.init(Workspace)
         Workspace.onDie.connect( function() {
             if(Workspace.checkRecord(Workspace.scores)) {
+                if(!Settings.mute) {
+                    Workspace.recordMusic.play()
+                }
                 var windowComponent = Qt.createComponent("qrc:/templates/InputWindow.qml");
                 var window = windowComponent.createObject(Workspace.scene);
                 window.onCloseWindow.connect(function(){

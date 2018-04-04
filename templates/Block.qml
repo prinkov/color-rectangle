@@ -10,7 +10,6 @@ Rectangle {
     property int conveyorHeight: 0
 
     property string col: {
-
         Workspace.colors[Math.ceil(Math.random() * 9) - 1]
     }
 

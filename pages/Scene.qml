@@ -8,9 +8,22 @@ Rectangle {
     id: scene
     property var rowLines: rowLinesView
     RectWindow {
+        id: rectWindow
+        Component.onCompleted: {
+            if(Workspace.pressContinue) {
+                rectWindow.destroy()
+                continueConv()
+            }
+        }
         onSelected: {
+            Workspace.contin = true
             createConv()
         }
+    }
+
+    Component.onDestruction: {
+        if(Workspace.contin)
+            Workspace.saveProgress()
     }
 
     Component.onCompleted: {
@@ -137,6 +150,12 @@ Rectangle {
                 createConv()
         }
 
+    }
+
+
+    function continueConv() {
+        for(var i = 0; i < Workspace.curLines; i++)
+            kernel.continueConv(i)
     }
 
     function createConv() {
