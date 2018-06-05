@@ -73,16 +73,10 @@ QtObject {
 
     function lifeDecrease() {
         if(lifes == 1) {
-            if(!Settings.mute) {
-                Workspace.lostLifeMusic.play()
-            }
             die()
             contin = false
         }
         if(lifes != 0) {
-            if(!Settings.mute) {
-                Workspace.lostLifeMusic.play()
-            }
             lifes--
         }
     }

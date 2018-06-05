@@ -1,6 +1,6 @@
-/* todo fo release:
+/* features for future:
  *  add main theme;
- *  adv code and position
+ *  market ONLY at game mode
  * */
 
 #include <QGuiApplication>
@@ -12,8 +12,8 @@
 
 int main(int argc, char *argv[]) {
 
-    QmlAdMobBanner::DeclareQML();
-    QmlAdMobInterstitial::DeclareQML();
+//    QmlAdMobBanner::DeclareQML();
+//    QmlAdMobInterstitial::DeclareQML();
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     Vibrator vibrator;

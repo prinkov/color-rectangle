@@ -2,9 +2,11 @@ pragma Singleton
 import QtQuick 2.7
 import QtQuick.LocalStorage 2.0
 import xyz.prinkov 1.0
+import QtQuick.Window 2.3
+
 QtObject {
-    property int screenWidth : 320
-    property int screenHeight : 480
+    property int screenWidth : Screen.width
+    property int screenHeight : Screen.height
     property int recordForThisPhone: 0
 
     property string name: "Player"

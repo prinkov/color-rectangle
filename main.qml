@@ -2,8 +2,8 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
-import com.dreamdev.QtAdMobBanner 1.0
-import com.dreamdev.QtAdMobInterstitial 1.0
+//import com.dreamdev.QtAdMobBanner 1.0
+//import com.dreamdev.QtAdMobInterstitial 1.0
 import QtQuick.Window 2.2
 import "./js/Kernel.js" as Kernel
 
@@ -13,8 +13,8 @@ Window {
     id: application
     visible: true
 
-    width: 320 // Settings.screenWidth
-    height: 480 //Settings.screenHeight
+    width: Settings.screenWidth
+    height: Settings.screenHeight
     title: "Rect Color"
 
     property var kernel: Kernel
@@ -24,9 +24,7 @@ Window {
         kernel.init(Workspace)
         Workspace.onDie.connect( function() {
             if(Workspace.checkRecord(Workspace.scores)) {
-                if(!Settings.mute) {
-                    Workspace.recordMusic.play()
-                }
+
                 var windowComponent = Qt.createComponent("qrc:/templates/InputWindow.qml");
                 var window = windowComponent.createObject(Workspace.scene);
                 window.onCloseWindow.connect(function(){
@@ -62,7 +60,6 @@ Window {
 //        y: 0
         anchors.fill: parent
         initialItem: Qt.resolvedUrl("qrc:/pages/MainMenu.qml")
-
         pushEnter:  Transition {
             PropertyAnimation {
                 property: "opacity"
@@ -126,7 +123,7 @@ Window {
 
     Rectangle {
         id: footer
-        color: "red"
+        color: "transparent"
         height: 50
         z: 10
         width: parent.width
@@ -135,14 +132,18 @@ Window {
         y: parent.height - 50
     }
 
-    AdMobBanner {
-            id: banner
-            x: footer.x
-            y: footer.y
-            Component.onCompleted: {
-                banner.unitId = "ca-app-pub-7485900711629006/8288667458"
-                banner.size = AdMobBanner.Banner
-                banner.visible = true
-            }
-     }
+//    AdMobBanner {
+//            id: banner
+//            x: footer.x
+//            y: footer.y - 50
+////            y: footer.y / 2 + footer.y + footer.height - 5
+//            Component.onCompleted: {
+//                console.log("footer y " + footer.y)
+//                console.log("banner y " + banner.y)
+//                console.log("height " + application.height)
+//                banner.unitId = "ca-app-pub-9405260411782977/4775980193"
+//                banner.size = AdMobBanner.SmartBanner
+//                banner.visible = true
+//            }
+//     }
 }
