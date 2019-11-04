@@ -10,7 +10,12 @@ Rectangle {
     property int conveyorHeight: 0
 
     property string col: {
-        Workspace.colors[Math.ceil(Math.random() * 9) - 1]
+
+        if (Math.random() <= 0.0095) {
+            Workspace.optionBlocks[Math.ceil(Math.random() * 3) - 1]
+        } else {
+            Workspace.colors[Math.ceil(Math.random() * 9) - 1]
+        }
     }
 
     color: "transparent"
@@ -24,30 +29,32 @@ Rectangle {
     property double durationPost: {
         Math.ceil(conveyorHeight * Workspace.speedConstant)
     }
-    property var oneAnim: NumberAnimation {
-
-    }
-    property var twoAnim: NumberAnimation {
-    }
-
+    property var oneAnim: NumberAnimation {}
+    property var twoAnim: NumberAnimation {}
 
     //todo корректировка чувствительности
     MouseArea {
         anchors.fill: parent
         onPressed: {
-            if(Workspace.color) {
-                console.log(Workspace.color  + " =? " + col)
-                if(Workspace.color === col) {
+            if (Workspace.color) {
+
+                if (col === 'life') {
+                    Workspace.lifeIncrease()
+                } else if (col === 'shield') {
+                    Workspace.shield()
+                } else if (Workspace.color === col) {
                     Workspace.scoreIncrease()
-                    Vibrator.vibrate(60)
-                } else
+                    if (!Workspace.isMute())
+                        Vibrator.vibrate(60)
+                } else {
                     Workspace.lifeDecrease()
+                }
             }
+
             ex.start()
             ex.onStopped.connect(function() {
                 try{
                     boomed()
-
                 } catch(e) {
                     console.log("is already boomed")
                 }

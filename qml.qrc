@@ -16,5 +16,6 @@
         <file>pages/Raiting.qml</file>
         <file>templates/InputWindow.qml</file>
         <file>templates/RestartWindow.qml</file>
+        <file>templates/Pashal.qml</file>
     </qresource>
 </RCC>

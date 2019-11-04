@@ -28,7 +28,7 @@ Rectangle {
             var component = Qt.createComponent("Letter.qml");
 
             for(var i = 0; i < text.length; i++)
-                letters[i] = component.createObject(oner, {"let": text.charAt(i), "animation": animation})
+                letters[i] = component.createObject(oner, {"let_": text.charAt(i), "animation": animation})
         }
 
     }

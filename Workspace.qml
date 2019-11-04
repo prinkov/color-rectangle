@@ -7,40 +7,41 @@ import QtMultimedia 5.8
 
 QtObject {
     property int scores: 0
-    property int lifes: 5
+    property int lifes: 3
     property bool contin: false
     property int speedConstant: 4
-    property int boomCount
+    property int boomCount: 0
     property var colors: ["black", "blue", "green", "orange", "pink", "purple", "red", "white", "yellow"]
+    property var optionBlocks: ["life", "life", "shield"]
 
     property variant colorCode: {"black":"#000000", "blue":"#0055a5", "green":"#69bd31",
                                  "orange":"#f27500", "pink":"#f22477", "purple":"#6f2b8e", "red":"#c51230",
                                  "white":"#ffffff", "yellow":"#fff000"}
-    property string color:""
+    property string color: ""
     property var scene
 
     signal die
     property bool mayCreate: true
     property int curLines: 0
     property int maxLines: 6
-
-
-    property var lostLifeMusic: MediaPlayer {
-          source: "qrc:/music/lost.wav"
-          autoPlay: false
-        }
-
-    property var recordMusic: MediaPlayer {
-          source: "qrc:/music/record.wav"
-          autoPlay: false
-        }
+    property bool isShield: false
 
     property bool pressContinue: false
+
+    property Timer shieldTimer: Timer {
+        interval: 6000;
+        running: false;
+        repeat: false
+        onTriggered: {
+             isShield = false
+         }
+     }
 
     function newGame() {
         boomCount = 0
         mayCreate = true
         scores = 0
+        color = ""
         lifes = 3
         speedConstant = 4
         curLines = 0
@@ -72,6 +73,9 @@ QtObject {
     }
 
     function lifeDecrease() {
+        if (isShield)
+            return;
+
         if(lifes == 1) {
             die()
             contin = false
@@ -79,6 +83,10 @@ QtObject {
         if(lifes != 0) {
             lifes--
         }
+    }
+
+    function lifeIncrease() {
+        lifes++
     }
 
     function boomIncrease() {
@@ -89,7 +97,7 @@ QtObject {
                 mayCreate = false;
             }
         } else {
-            if(boomCount == 120 * maxLines + 20 * maxLines && speedConstant > 2) {
+            if(boomCount == 120 * maxLines + 20 * maxLines && speedConstant > 3) {
                 boomCount = 20 * maxLines;
                 mayCreate = false;
                 speedConstant--;
@@ -98,8 +106,16 @@ QtObject {
     }
 
     function saveRecord(name, color, newRecord) {
-        if(!newRecord)
+        if (!newRecord)
             return
+        try {
+            var request = new XMLHttpRequest()
+            var datatype = "application/x-www-form-urlencoded; charset=UTF-8";
+            request.open('GET', 'http://datahelper.online/rectcolor/saverecord?name='+name+'&color='+color+'&record='+newRecord+'&apiKey=tesla12')
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            request.send();
+        } catch (e) {}
+
         Settings.db.transaction( function(tx) {
             var rs = tx.executeSql('SELECT * FROM Records');
             var j =0;
@@ -155,8 +171,6 @@ QtObject {
                 }
             }
          })
-        console.log("Wokspace.qml:96check record "
-                        + probNewRecord + ", return value: " + ret)
         return ret
     }
 
@@ -187,6 +201,20 @@ QtObject {
            tx.executeSql('UPDATE Progress SET value="' + lifes + '" WHERE option="lifes"');
            tx.executeSql('UPDATE Progress SET value="' + speedConstant + '" WHERE option="speedConstant"');
        })
+   }
 
+   function isMute() {
+       return Settings.mute;
+   }
+
+
+
+   function shield() {
+       if (isShield) {
+           shieldTimer.restart()
+       } else {
+           isShield = true
+           shieldTimer.start()
+       }
    }
 }

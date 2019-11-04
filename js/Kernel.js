@@ -1,4 +1,5 @@
 var workspace
+
 function init(workspace_) {
     workspace = workspace_
 }
@@ -12,7 +13,7 @@ function createConv() {
         var conv = convComponent.createObject(workspace.scene.rowLines);
         conv.width = workspace.scene.width / workspace.maxLines
         conv.height = workspace.scene.height
-        if(workspace.curLines === 0)
+        if (workspace.curLines === 0)
             var t = createBlock(conv)
         workspace.curLines++
         workspace.scene.rowLines.width = workspace.curLines *
@@ -50,7 +51,7 @@ function createBlock(conv) {
     t.oneAnim.stopped.connect(function() {
         if(workspace.mayCreate) {
             var g = createBlock(conv)
-        } else if(!workspace.scene.timer.running){
+        } else if (!workspace.scene.timer.running) {
             console.log("i'm started")
             workspace.scene.timer.start()
         }
@@ -58,11 +59,11 @@ function createBlock(conv) {
     })
     t.twoAnim.stopped.connect(function() {
         if(t.col === workspace.color) {
-            if(workspace.lifes !==0)
+            if(workspace.lifes !== 0 && !workspace.isMute())
                 Vibrator.vibrate(60)
-
             workspace.lifeDecrease()
         }
+
         t.destroy()
         workspace.boomIncrease()
 

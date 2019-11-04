@@ -5,8 +5,8 @@ import xyz.prinkov 1.0
 import QtQuick.Window 2.3
 
 QtObject {
-    property int screenWidth : Screen.width
-    property int screenHeight : Screen.height
+    property int screenWidth : 600//Screen.width
+    property int screenHeight : 800//Screen.height
     property int recordForThisPhone: 0
 
     property string name: "Player"
@@ -56,11 +56,6 @@ QtObject {
                 mute = !mute;
             }
         )
-//        if(mute)
-//            Workspace.playMusic.stop()
-//        else
-//            Workspace.playMusic.play()
-
     }
 
     function saveWorkspace(workspace) {

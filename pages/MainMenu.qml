@@ -43,8 +43,8 @@ Rectangle {
     Column {
         anchors.top: colorLbl2.bottom
         anchors.topMargin: 50
-        spacing:35
-        width:parent.width
+        spacing: 35
+        width: parent.width
 
         RectLabel {
             id: cntBtn
@@ -86,7 +86,6 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-//                    banner.visible = true
                     startBtn.destroyAll()
                 }
             }
@@ -141,24 +140,24 @@ Rectangle {
         width: parent.width
 
 
-//        Image {
-//            source: Settings.mute ?  "qrc:/images/mute.png" : "qrc:/images/speaker.png"
-//            antialiasing: true
-//            fillMode: Image.PreserveAspectFit
-//            height: parent.height - 10
-//            anchors.right: parent.right
-//            anchors.rightMargin: 20
-//            MouseArea {
-//                anchors.fill: parent
-//                onClicked: {
-//                    if(!Settings.mute)
-//                        parent.source = "qrc:/images/mute.png"
-//                    else
-//                        parent.source = "qrc:/images/speaker.png"
-//                    Settings.switchMute()
-//                }
-//            }
-//        }
+        Image {
+            source: Settings.mute ?  "qrc:/images/mute.png" : "qrc:/images/speaker.png"
+            antialiasing: true
+            fillMode: Image.PreserveAspectFit
+            height: parent.height - 10
+            anchors.right: parent.right
+            anchors.rightMargin: 20
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if(!Settings.mute)
+                        parent.source = "qrc:/images/mute.png"
+                    else
+                        parent.source = "qrc:/images/speaker.png"
+                    Settings.switchMute()
+                }
+            }
+        }
     }
 
 }

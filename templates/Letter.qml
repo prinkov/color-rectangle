@@ -3,7 +3,7 @@ import QtQuick.Particles 2.0
 
 Image {
     id: letter
-    property string let: "c"
+    property string let_: "c"
     property bool animation: true
     property int boomSpeed: 400
     rotation: animation ? getRnd(-30) : 0
@@ -61,9 +61,9 @@ Image {
     height: parent.height
     fillMode: Image.PreserveAspectFit
     antialiasing: true
-    source: "qrc:/images/en_alpha/"+let+".png"
+    source: "qrc:/images/en_alpha/"+let_+".png"
 
-    opacity: !(let == " ") ? 1 : 0
+    opacity: !(let_ == " ") ? 1 : 0
 
     SequentialAnimation {
         id: rotating

@@ -81,5 +81,8 @@
         <file>images/return.png</file>
         <file>images/checked.png</file>
         <file>images/reload.png</file>
+        <file>images/colors/life.png</file>
+        <file>images/colors/shield.png</file>
+        <file>images/pascal.png</file>
     </qresource>
 </RCC>

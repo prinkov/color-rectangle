@@ -85,6 +85,7 @@ Rectangle {
             height: heartIcon.height
             color: "#94e7ef"
             font.pixelSize: heartIcon.height
+            visible: !Workspace.isShield
         }
 
         Text {
@@ -96,6 +97,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             color: "#94e7ef"
             font.pixelSize: heartIcon.height / 2
+            visible: !Workspace.isShield
         }
 
         Image {
@@ -105,9 +107,10 @@ Rectangle {
             height: parent.height - 10
             anchors.verticalCenter: parent.verticalCenter
             fillMode: Image.PreserveAspectFit
-            source: "qrc:/images/heart.png"
+            source: Workspace.isShield ? "qrc:/images/colors/shield.png" : "qrc:/images/heart.png"
             antialiasing: true
         }
+
 
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -144,7 +147,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.horizontalCenter: parent.horizontalCenter
-        width:  parent.width
+        width: parent.width
         height: parent.height
     }
 
@@ -154,10 +157,9 @@ Rectangle {
         repeat: false
         onTriggered: {
             Workspace.mayCreate = true
-            if(Workspace.curLines < Workspace.maxLines)
+            if (Workspace.curLines < Workspace.maxLines)
                 createConv()
         }
-
     }
 
 

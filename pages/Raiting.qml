@@ -90,6 +90,24 @@ Rectangle {
 
 
     Button {
+        id: worldRating
+        height: raiting.width / Workspace.maxLines
+
+        anchors.bottom: parent.bottom
+        anchors.margins: 20
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: "World rating (beta)"
+        background: Rectangle {
+            color: "#607D8B"
+            opacity: 0.85
+            radius: 0.4 * worldRating.width
+        }
+        onClicked: {
+            Qt.openUrlExternally("http://datahelper.online/rectcolor");
+        }
+    }
+
+    Button {
         id: back
         height: raiting.width / Workspace.maxLines
         width: raiting.width / Workspace.maxLines
